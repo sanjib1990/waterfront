@@ -31,6 +31,18 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
+## Requirement
+
+- node and npm
+- php > 5.6 
+
+## Setup
+
+- Clone the repository
+- Navigate to the root folder and run `composer install`
+- run `npm install`
+- Last, run the webpack, `npm run dev`. Commands can be seen in `package.json`
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
