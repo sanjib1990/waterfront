@@ -13,6 +13,11 @@ const { mix } = require('laravel-mix');
 
 mix
     .scripts([
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+        'node_modules/sweetalert2/dist/sweetalert2.js',
+        'node_modules/toastr/build/toastr.min.js',
+        'resources/assets/js/loader.js',
         'resources/assets/js/app.js'
     ], 'public/js/app.js')
     .sass('resources/assets/sass/app.scss', 'public/css/app.css')

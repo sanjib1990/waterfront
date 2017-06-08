@@ -86,5 +86,13 @@ class AppServiceProvider extends ServiceProvider
      */
     private function booContracts()
     {
+        $this->app->bind(
+            'App\Contracts\RelationContract',
+            'App\Models\Relation'
+        );
+        $this->app->bind(
+            'App\Contracts\PersonContract',
+            'App\Models\Person'
+        );
     }
 }
