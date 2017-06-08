@@ -2,8 +2,31 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\TrimStrings;
+use App\Http\Middleware\ApiMiddleware;
+use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Auth\Middleware\Authenticate;
+use App\Http\Middleware\HasCookieIdMiddleware;
+use Illuminate\Session\Middleware\StartSession;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 
+/**
+ * Class Kernel
+ *
+ * @package App\Http
+ */
 class Kernel extends HttpKernel
 {
     /**
@@ -14,10 +37,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Http\Middleware\TrimStrings::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        CheckForMaintenanceMode::class,
+        ValidatePostSize::class,
+        TrimStrings::class,
+        ConvertEmptyStringsToNull::class,
+        StartSession::class,
+        ShareErrorsFromSession::class,
     ];
 
     /**
@@ -27,13 +52,11 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            AuthenticateSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
         ],
 
         'api' => [
@@ -50,11 +73,16 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'auth'          => Authenticate::class,
+        'auth.basic'    => AuthenticateWithBasicAuth::class,
+        'bindings'      => SubstituteBindings::class,
+        'can'           => Authorize::class,
+
+        'guest'         => RedirectIfAuthenticated::class,
+        'throttle'      => ThrottleRequests::class,
+
+        // Middleware that makes sure that we have the proper headers in the request.
+        'header'        => ApiMiddleware::class,
+        'cookie'        => HasCookieIdMiddleware::class
     ];
 }
