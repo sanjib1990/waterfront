@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sanjib
- * Date: 7/6/17
- * Time: 12:13 PM
- */
 
 use Ramsey\Uuid\Uuid;
 
