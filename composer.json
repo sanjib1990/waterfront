@@ -12,6 +12,7 @@
         "laravel/passport": "^2.0",
         "laravel/tinker": "~1.0",
         "league/fractal": "^0.16.0",
+        "predis/predis": "^1.1",
         "ramsey/uuid": "^3.6"
     },
     "require-dev": {
