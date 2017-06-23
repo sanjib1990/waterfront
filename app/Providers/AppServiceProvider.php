@@ -33,6 +33,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->app->environment() !== 'prod') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
 
     /**
@@ -93,6 +96,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Contracts\PersonContract',
             'App\Models\Person'
+        );
+        $this->app->bind(
+            'App\Contracts\ApiAuthenticateContract',
+            'App\Utils\JwtAuthenticator'
         );
     }
 }

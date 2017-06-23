@@ -11,6 +11,11 @@ use Illuminate\Support\Collection;
  */
 class Factory
 {
+    /**
+     * Namespace of the class
+     *
+     * @var string
+     */
     public $namespace;
 
     /**

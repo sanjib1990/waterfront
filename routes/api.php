@@ -17,7 +17,19 @@ Route::group([
     'prefix'        => 'v1',
     'middleware'    => ['header']
 ], function () {
-    Route::group(['prefix' => 'persons'], function () {
+    // Token
+    Route::group([
+        'prefix'    => 'auth',
+        'namespace' => 'Api'
+    ], function () {
+        Route::post('/token', 'AuthenticateController@token');
+    });
+
+    // App Routes
+    Route::group([
+        'prefix'        => 'persons',
+        'middleware'    => 'jwt.auth'
+    ], function () {
         Route::get('{uuid?}', 'PersonController@get')
             ->where('uuid', '[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}');
 
