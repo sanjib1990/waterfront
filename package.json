@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
+    "chai": "^4.0.2",
     "cross-env": "^3.2.3",
     "jquery": "^3.2.1",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
+    "mocha": "^3.4.2",
     "sweetalert2": "^6.6.5",
     "toastr": "^2.1.2"
   }
