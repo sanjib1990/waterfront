@@ -18,4 +18,4 @@ dependencies:
 test:
   override:
     - vendor/bin/phpunit tests
-    - node_modules/.bin/mocha tests/JS
+    - npm run test
