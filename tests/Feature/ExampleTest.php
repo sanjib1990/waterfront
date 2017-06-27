@@ -18,4 +18,16 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    /**
+     * This is additonal test
+     *
+     * @test
+     *
+     * @return void
+     */
+    public function another()
+    {
+        $this->assertTrue(true);
+    }
 }
