@@ -18,6 +18,8 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
+        dd($response->decodeResponseJson());
+
         $response->assertStatus(200);
     }
 }
