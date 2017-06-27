@@ -2,12 +2,19 @@ machine:
   build:
     version: ubuntu-14.04-XXL-upstart-1189-5614f37
 
+  environment:
+      CIRCLE_ENV: test
+
   php:
     version: 7.0.17
 
   node:
     version: v6.1.0
 
-    test:
-      override:
-        - vendor/bin/phpunit tests
+dependencies:
+  pre:
+    - cp .env.testing .env
+
+test:
+  override:
+    - vendor/bin/phpunit tests
