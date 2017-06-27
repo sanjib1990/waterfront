@@ -21,5 +21,12 @@ return [
     // Validations
     'validations'   => [
         'auth'  => 'Email or password is invalid.'
-    ]
+    ],
+
+    // JWT
+    'token_not_provided'    => 'Token is missing in the header.',
+    'token_expired'         => 'Token has expired',
+    'token_invalid'         => 'Token is invalid',
+    'user_not_found'        => 'User corresponding to the token is not found.',
+    ''
 ];

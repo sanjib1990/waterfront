@@ -4,13 +4,13 @@ namespace App\Http;
 
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\ApiMiddleware;
+use App\Http\Middleware\JwtMiddleware;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Middleware\Authorize;
 use Tymon\JWTAuth\Middleware\RefreshToken;
 use Illuminate\Auth\Middleware\Authenticate;
 use Tymon\JWTAuth\Middleware\GetUserFromToken;
-use App\Http\Middleware\HasCookieIdMiddleware;
 use Illuminate\Session\Middleware\StartSession;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -85,8 +85,7 @@ class Kernel extends HttpKernel
 
         // Middleware that makes sure that we have the proper headers in the request.
         'header'        => ApiMiddleware::class,
-        'cookie'        => HasCookieIdMiddleware::class,
-        'jwt.auth'      => GetUserFromToken::class,
+        'jwt.auth'      => JwtMiddleware::class,
         'jwt.refresh'   => RefreshToken::class,
     ];
 }

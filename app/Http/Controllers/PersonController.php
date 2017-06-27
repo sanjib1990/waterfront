@@ -8,10 +8,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\RelationContract;
 use Carbon\Carbon;
+use Tymon\JWTAuth\JWTAuth;
 use App\Utils\Transformer;
 use App\Contracts\PersonContract;
+use App\Contracts\RelationContract;
 use App\Http\Requests\PersonRequest;
 use App\Transformers\PersonsTransformer;
 use App\Http\Requests\RelatePersonRequest;
@@ -34,13 +35,20 @@ class PersonController extends Controller
     private $transformer;
 
     /**
+     * @var \Tymon\JWTAuth\JWTAuth
+     */
+    private $auth;
+
+    /**
      * PersonController constructor.
      *
-     * @param PersonContract $person
-     * @param Transformer    $transformer
+     * @param \Tymon\JWTAuth\JWTAuth $auth
+     * @param PersonContract         $person
+     * @param Transformer            $transformer
      */
-    public function __construct(PersonContract $person, Transformer $transformer)
+    public function __construct(JWTAuth $auth, PersonContract $person, Transformer $transformer)
     {
+        $this->auth         = $auth;
         $this->person       = $person;
         $this->transformer  = $transformer;
     }
@@ -115,6 +123,14 @@ class PersonController extends Controller
         return response(null, 205);
     }
 
+    /**
+     * Relate.
+     *
+     * @param \App\Http\Requests\RelatePersonRequest $request
+     * @param \App\Contracts\RelationContract        $relation
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function relate(RelatePersonRequest $request, RelationContract $relation)
     {
         $person         = $this->person->getByUuid($request->uuid);

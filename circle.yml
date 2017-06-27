@@ -1,0 +1,9 @@
+machine:
+  build:
+    version: ubuntu-14.04-XXL-upstart-1189-5614f37
+
+  php:
+    version: 7.0.18
+
+  node:
+    version: v6.11.0
