@@ -43,12 +43,10 @@ class AuthenticateController extends Controller
     /**
      * Refresh Token.
      *
-     * @param \App\Http\Requests\Api\TokenRequest $request
-     *
      * @return mixed
      */
-    public function refreshToken(TokenRequest $request)
+    public function refreshToken()
     {
-        return response()->jsend($this->authenticator->refreshToken($request->all()), trans("api.success"));
+        return response()->jsend($this->authenticator->refreshToken(request()), trans("api.success"));
     }
 }

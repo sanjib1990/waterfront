@@ -8,6 +8,7 @@
 namespace App\Utils;
 
 use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Contracts\ApiAuthenticateContract;
 use App\Exceptions\InvalidUserInputException;
@@ -60,13 +61,13 @@ class JwtAuthenticator implements ApiAuthenticateContract
     /**
      * Refrest the generated token.
      *
-     * @param array $data
+     * @param \Illuminate\Http\Request $request
      *
      * @return mixed
      */
-    public function refreshToken(array $data)
+    public function refreshToken(Request $request)
     {
-        // TODO: Implement refreshToken() method.
+        return $this->auth->setRequest($request)->refresh();
     }
 
     /**

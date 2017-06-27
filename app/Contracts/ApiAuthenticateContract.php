@@ -7,6 +7,8 @@
 
 namespace App\Contracts;
 
+use Illuminate\Http\Request;
+
 /**
  * Interface ApiAuthenticateContract
  *
@@ -26,11 +28,11 @@ interface ApiAuthenticateContract
     /**
      * Refrest the generated token.
      *
-     * @param array $data
+     * @param \Illuminate\Http\Request $request
      *
      * @return mixed
      */
-    public function refreshToken(array $data);
+    public function refreshToken(Request $request);
 
     /**
      * Validate the authentication token.

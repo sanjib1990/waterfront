@@ -23,6 +23,7 @@ Route::group([
         'namespace' => 'Api'
     ], function () {
         Route::post('/token', 'AuthenticateController@token');
+        Route::post('/token/refresh', 'AuthenticateController@refreshToken')->middleware(['jwt.auth']);
     });
 
     // App Routes
