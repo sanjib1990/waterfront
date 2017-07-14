@@ -33,11 +33,11 @@ abstract class StandardizedErrorResponseException extends \Exception
      *
      * @param string         $message
      * @param int            $code
-     * @param Exception|null $previous
+     * @param \Exception|null $previous
      * @param array          $errors
      * {@inheritdoc}
      */
-    public function __construct($message = '', $code = 0, Exception $previous = null, $errors = [])
+    public function __construct($message = '', $code = 0, \Exception $previous = null, $errors = [])
     {
         $this->message  = $message == '' ? $this->message : $message;
         $this->code     = $code == 0 ? $this->code : $code;
