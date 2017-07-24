@@ -82,6 +82,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="http://wzrd.in/standalone/uuid@latest"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
