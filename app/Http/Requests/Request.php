@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Exceptions\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Exceptions\InvalidUserInputException;
 use Illuminate\Contracts\Validation\Validator;
@@ -22,6 +21,16 @@ abstract class Request extends FormRequest
     abstract public function rules();
 
     /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
      * @param Validator $validator
      *
      * @return array|void
@@ -30,15 +39,5 @@ abstract class Request extends FormRequest
     protected function formatErrors(Validator $validator)
     {
         throw new InvalidUserInputException(null, 400, null, $validator->errors());
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
     }
 }

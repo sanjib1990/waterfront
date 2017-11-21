@@ -22,6 +22,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class Handler extends ExceptionHandler
 {
+
+    /**
+     * A list of the exception types that should not be reported.
+     *
+     * @var array
+     */
+    protected $dontReport = [
+        AuthenticationException::class,
+        AuthorizationException::class,
+        HttpException::class,
+        ModelNotFoundException::class,
+        TokenMismatchException::class,
+        ValidationException::class,
+    ];
     /**
      * @var int $code
      */
@@ -41,20 +55,6 @@ class Handler extends ExceptionHandler
      * @var array $validationErrors
      */
     private $validationErrors   = [];
-
-    /**
-     * A list of the exception types that should not be reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        AuthenticationException::class,
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        TokenMismatchException::class,
-        ValidationException::class,
-    ];
 
     /**
      * Handler constructor.
@@ -108,42 +108,6 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Convert an authentication exception into an unauthenticated response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
-
-        return redirect()->guest(route('login'));
-    }
-
-    /**
-     * @param Request   $request
-     * @param Exception $exception
-     * @param null      $code
-     *
-     * @return \Illuminate\Http\Response
-     */
-    private function handleApiErrors(Request $request, Exception $exception, $code = null)
-    {
-        $this->request  = $request;
-        $this->error    = $exception;
-        $this->code     = $code ?? $this->setStatusCode();
-
-        if (method_exists($this->error, 'getValidationErrors')) {
-            $this->validationErrors = $this->error->getValidationErrors();
-        }
-
-        return response()->jsend($this->getDebugInfo(), $this->getMessage(), $this->code);
-    }
-
-    /**
      * Returns the debug info only if app environment is not production
      *
      * @return array
@@ -176,6 +140,26 @@ class Handler extends ExceptionHandler
         ];
 
         return $info;
+    }
+
+    /**
+     * @param Request   $request
+     * @param Exception $exception
+     * @param null      $code
+     *
+     * @return \Illuminate\Http\Response
+     */
+    private function handleApiErrors(Request $request, Exception $exception, $code = null)
+    {
+        $this->request  = $request;
+        $this->error    = $exception;
+        $this->code     = $code ?? $this->setStatusCode();
+
+        if (method_exists($this->error, 'getValidationErrors')) {
+            $this->validationErrors = $this->error->getValidationErrors();
+        }
+
+        return response()->jsend($this->getDebugInfo(), $this->getMessage(), $this->code);
     }
 
     /**

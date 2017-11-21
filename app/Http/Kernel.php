@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\TrimStrings;
+use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\ApiMiddleware;
 use App\Http\Middleware\JwtMiddleware;
 use App\Http\Middleware\EncryptCookies;
@@ -10,7 +11,6 @@ use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Middleware\Authorize;
 use Tymon\JWTAuth\Middleware\RefreshToken;
 use Illuminate\Auth\Middleware\Authenticate;
-use Tymon\JWTAuth\Middleware\GetUserFromToken;
 use Illuminate\Session\Middleware\StartSession;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -45,6 +45,7 @@ class Kernel extends HttpKernel
         ConvertEmptyStringsToNull::class,
         StartSession::class,
         ShareErrorsFromSession::class,
+        TrustProxies::class,
     ];
 
     /**

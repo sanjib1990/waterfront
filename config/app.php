@@ -165,11 +165,6 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-        Laravel\Tinker\TinkerServiceProvider::class,
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -179,7 +174,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // Third party integrations
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
 
     ],
 
@@ -233,6 +229,8 @@ return [
         // Third party integrations
         'JWTAuth'       => 'Tymon\JWTAuth\Facades\JWTAuth',
         'JWTFactory'    => 'Tymon\JWTAuth\Facades\JWTFactory',
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
     ],
 
