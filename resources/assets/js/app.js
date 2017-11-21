@@ -20,8 +20,6 @@ Vue.use(VueRouter);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('task', require('./components/Task.vue'));
-
 const app = new Vue({
     el: '#app',
     router

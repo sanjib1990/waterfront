@@ -52,7 +52,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <router-link tag="li" to="/">
+                            <router-link tag="li" to="/task">
                                 <a>Tasks</a>
                             </router-link>
                             <li class="dropdown">
