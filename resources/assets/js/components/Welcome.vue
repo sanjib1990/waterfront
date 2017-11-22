@@ -5,7 +5,6 @@
                 Welcome to Dashboard
             </div>
         </div>
-
     </div>
 </template>
 
@@ -13,7 +12,6 @@
     export default {
         data(){
             return {
-                user: {}
             }
         },
         mounted()
