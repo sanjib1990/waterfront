@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/test', 'TestController@index');
 Route::group([
     'prefix'        => 'v1',
     'middleware'    => ['header']
