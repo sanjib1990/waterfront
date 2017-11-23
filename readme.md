@@ -4,6 +4,7 @@
 
 - node and npm
 - php >= 7.0 
+- mysql
 
 ## Setup
 
