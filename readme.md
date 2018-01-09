@@ -3,7 +3,7 @@
 ## Requirement
 
 - node and npm
-- php >= 7.0 
+- php >= 7.2
 - mysql
 
 ## Setup
