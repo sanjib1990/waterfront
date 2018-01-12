@@ -5,9 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Events\Dispatcher;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 /**
  * Class JwtMiddleware
@@ -48,9 +48,11 @@ class JwtMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     *
      * @return mixed
+     * @throws \Exception
      */
     public function handle($request, Closure $next)
     {
@@ -62,7 +64,7 @@ class JwtMiddleware
             $user = $this->auth->authenticate($token);
         } catch (TokenExpiredException $e) {
             return $this->respond('tymon.jwt.expired', 'token_expired', 401, [$e]);
-        } catch (JWTException $e) {
+        } catch (TokenInvalidException $e) {
             return $this->respond('tymon.jwt.invalid', 'token_invalid', 401, [$e]);
         }
 

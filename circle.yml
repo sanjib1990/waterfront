@@ -1,15 +1,12 @@
 machine:
   build:
-    version: ubuntu-14.04-XXL-upstart-1189-5614f37
+    version: ubuntu-14.04-XXL-1325-0ccc9ce
 
   environment:
       CIRCLE_ENV: test
 
-  pre:
-    - sudo apt-get update; USE_PRECOMPILE=true sudo -E circleci-install php 7.1.0
-    - php -v
   php:
-    version: 7.1.0
+    version: 7.1.9
 
   node:
     version: v6.1.0
