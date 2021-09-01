@@ -11,7 +11,7 @@
     "test": "node_modules/.bin/mocha tests/JS"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "bootstrap-sass": "^3.3.7",
     "browser-sync": "^2.23.7",
     "browser-sync-webpack-plugin": "^1.2.0",
